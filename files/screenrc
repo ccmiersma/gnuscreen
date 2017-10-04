@@ -1,0 +1,65 @@
+escape ^``
+
+hardstatus string "%{= kw}%-w%{= BW}%n %t%{-}%+w %-= %l"
+
+hardstatus alwayslastline
+
+caption splitonly
+
+defscrollback 10000
+
+mousetrack on
+
+screen journalctl -f
+screen bash
+screen bash
+screen bash
+
+screen htop
+screen atop
+screen mc / ~/
+screen w3mman
+
+logfile $HOME/.screen/screen-%n.%Y%m%d.log
+
+# define layouts
+layout autosave on
+layout new 'Vertical'
+split -v
+select 1
+focus right
+select 2
+layout new 'Horizontal'
+split
+select 1
+focus down
+select 2
+layout new  'Unified'
+select 3
+
+#Some more intuitive key bindings
+bind ' ' layout next
+bind U layout select 'Unified'
+bind V layout select 'Vertical'
+bind H layout select 'Horizontal'
+bind L log on
+bind l log off
+
+# navigating regions with Ctrl-arrows
+bindkey "^[[1;5D" focus left
+bindkey "^[[1;5C" focus right
+bindkey "^[[1;5A" focus up
+bindkey "^[[1;5B" focus down
+
+bindkey R eval "command -c rsz" # enter resize mode
+
+# Use h and H and v and V for horizontal grow/shrink, +-=, and m/M work as well.
+bind -c rsz "h" eval "resize -h -5" "command -c rsz"
+bind -c rsz "v" eval "resize -v -5" "command -c rsz"
+bind -c rsz "V" eval "resize -v +5" "command -c rsz"
+bind -c rsz "H" eval "resize -h +5" "command -c rsz"
+bind -c rsz "=" eval "resize =" "command -c rsz"
+bind -c rsz "m" eval "resize min" "command -c rsz"
+bind -c rsz "M" eval "resize max" "command -c rsz"
+bind -c rsz "-" eval "resize -5" "command -c rsz"
+bind -c rsz "+" eval "resize +5" "command -c rsz"

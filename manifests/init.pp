@@ -42,7 +42,7 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class gnuscreen {
+class gnuscreen( $user_home = '/home/cmiersma' ) {
 
-
+  include gnuscreen::config
 }
