@@ -10,15 +10,11 @@ defscrollback 10000
 
 mousetrack on
 
-screen journalctl -f
+screen journalctl -f # This should give basic console output on most platforms.
 screen bash
 screen bash
 screen bash
 
-screen htop
-screen atop
-screen mc / ~/
-screen w3mman
 
 logfile $HOME/.screen/screen-%n.%Y%m%d.log
 

@@ -14,70 +14,54 @@
 
 ## Description
 
-Start with a one- or two-sentence summary of what the module does and/or what
-problem it solves. This is your 30-second elevator pitch for your module.
-Consider including OS/Puppet version it works with.
+This module installs and configures GNU Screen on a user by user basis.
+It has been tested on Redhat/CentOS/Fedora distros.
 
-You can give more descriptive information in a second paragraph. This paragraph
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?" If your module has a range of functionality (installation, configuration,
-management, etc.), this is the time to mention it.
+This module is divided into a packages and a config class. The config class 
+can be used by a non-root user. It creates a .screen directory, which can hold
+multiple configurations and log files. If the .screenrc file does not exist it
+symlinks to a default config, which is more useful than the system screenrc. Users
+can overwrite or point the symlink elsewhere, so it will be easy to install this
+side-by-side with another configuration and use both. Future alternate configurations
+will be deployed in the same way. Rather than trying to template the .screenrc, this just
+provides a means of managing multiple alternate config files.
 
 ## Setup
 
-### What gnuscreen affects **OPTIONAL**
+### What gnuscreen affects
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
-
-If there's more that they should know about, though, this is the place to mention:
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section
-here.
+If you are using ~/.screen or ~/.screenrc for anything, it may cause conflict. 
 
 ### Beginning with gnuscreen
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most
-basic use of the module.
+You module is designed to be used on a user by user basis. The default will configure the root user.
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the
-fancy stuff with your module here. It's especially helpful if you include usage
-examples and code samples for doing things with your module.
+This module assumes you have a valid user home. You must pass determine a user's home directory
+externally and pass that to the module. Otherwise, it will configure root.
+
+Typically, it would be called as below:
+
+```
+class { 'gnuscreen':
+  user_home => '/home/username',
+} 
+```
+
+This would install this configuration for the user `username`.
 
 ## Reference
 
-Here, include a complete list of your module's classes, types, providers,
-facts, along with the parameters for each. Users refer to this section (thus
-the name "Reference") to find specific details; most users don't read it per
-se.
+It includes two classes `packages` and `config`.
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc. If there
-are Known Issues, you might want to include them under their own heading here.
+It has only been tested on Fedora, but should work on most Linux distros.
+The default screen config launches some applications that may not be installed on all systems.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
+This is currently a minimal release. Anything may change.
 
-## Release Notes/Contributors/Etc. **Optional**
 
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel
-are necessary or important to include here. Please use the `## ` header.

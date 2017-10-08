@@ -42,7 +42,8 @@
 #
 # Copyright 2017 Your name here, unless otherwise noted.
 #
-class gnuscreen( $user_home = '/home/cmiersma' ) {
+class gnuscreen( $user_home = '/root' ) {
 
+  include gnuscreen::packages
   include gnuscreen::config
 }
