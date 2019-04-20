@@ -10,7 +10,7 @@ defscrollback 10000
 
 mousetrack on
 
-screen journalctl -f # This should give basic console output on most platforms.
+screen bash
 screen bash
 screen bash
 screen bash
@@ -47,7 +47,7 @@ bindkey "^[[1;5C" focus right
 bindkey "^[[1;5A" focus up
 bindkey "^[[1;5B" focus down
 
-bindkey R eval "command -c rsz" # enter resize mode
+bind R eval "command -c rsz" # enter resize mode
 
 # Use h and H and v and V for horizontal grow/shrink, +-=, and m/M work as well.
 bind -c rsz "h" eval "resize -h -5" "command -c rsz"
